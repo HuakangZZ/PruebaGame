@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import objetoInvitible.*
 
 object juego {
 	
@@ -7,27 +8,31 @@ object juego {
 		keyboard.d().onPressDo { rojito.moverDerecha()}
 		keyboard.g().onPressDo { rojito.pegar()}
 		keyboard.a().onPressDo { rojito.moverIzquierda()}
-		keyboard.b().onPressDo { game.say(rojito,"hola")}
 		keyboard.right().onPressDo { azulito.moverDerecha()}
 		keyboard.left().onPressDo { azulito.moverIzquierda()}
 		keyboard.l().onPressDo { azulito.pegar()}
 		game.title("Peleita")
-		game.height(17)
-		game.width(35)
+		game.height(15)
+		game.width(30)
 		game.boardGround("FondoBox.jpg")
 		game.addVisual(rojito)
 		game.addVisual(azulito)
-		game.start()
+		game.addVisual(invisibleRojo)
 		
 		game.onTick(500,"prueba",{
-		rojito.cambiar()
+			rojito.cambiar()
 		})
 	
 		game.onTick(500,"prueba",{
-		azulito.cambiar()
+			azulito.cambiar()
 		})
 		
-		}
+		game.whenCollideDo(azulito,{p => azulito.quieto()})
+		game.whenCollideDo(rojito,{p => rojito.quieto()})
+	
+		game.start()
+		
+	}
 	
 	
 	

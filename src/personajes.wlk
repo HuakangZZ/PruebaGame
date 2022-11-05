@@ -1,17 +1,20 @@
 import wollok.game.*
+import objetoInvitible.*
 
 object rojito {
 	var property image = "rojitoEstatico1.png"
 	var property position = game.at(0,0)
 	
 	method moverDerecha(){
-		if (position.x() != game.width().div(6))
+		if (position.x() != game.width())
 		position = new Position(x = position.x()+1, y = position.y())
+		invisibleRojo.movete(self)
 	}
 	
 	method moverIzquierda(){
 		if (position.x() != -1)
 		position = new Position(x = position.x()-1, y = position.y())
+		invisibleRojo.movete(self)
 	}
 	
 	method cambiar() =
@@ -28,14 +31,14 @@ object rojito {
 	}
 	
 	method quieto(){
-		position = game.origin()
+		position = game.at(position.x()-1,0)
 	}
 
 }
 
 object azulito {
 	var property image = "azulitoEstatico1.png"
-	var property position = game.at(game.width(),0)
+	var property position = game.at(game.width()-9,0)
 	
 	method moverDerecha(){
 		if (position.x() != game.width())
@@ -61,7 +64,7 @@ object azulito {
 	}
 	
 	method quieto(){
-		position = game.origin()
+		position = game.at(position.x()+1,0)
 	}
 	
 }
