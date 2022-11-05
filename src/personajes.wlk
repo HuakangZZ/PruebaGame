@@ -9,6 +9,8 @@ object rojito {
 		if (position.x() != game.width())
 		position = new Position(x = position.x()+1, y = position.y())
 		invisibleRojo.movete(self)
+		if (invisibleRojo.position().x() > azulito.position().x())
+			position = game.at(position.x()-1,0)
 	}
 	
 	method moverIzquierda(){
@@ -41,13 +43,15 @@ object azulito {
 	var property position = game.at(game.width()-9,0)
 	
 	method moverDerecha(){
-		if (position.x() != game.width())
+		if (position.x() != game.width()-9)
 		position = new Position(x = position.x()+1, y = position.y())
 	}
 	
 	method moverIzquierda(){
 		if (position.x() != game.width().div(6))
 		position = new Position(x = position.x()-1, y = position.y())
+		if (self.position().x() < invisibleRojo.position().x())
+			position = game.at(position.x()+1,0)
 	}
 	
 	method cambiar() =

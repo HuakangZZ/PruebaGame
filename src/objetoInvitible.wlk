@@ -8,5 +8,7 @@ object invisibleRojo {
 	
 	method movete(personaje){
 		position = game.at(personaje.position().x()+9,0)
+		if (position.x()> azulito.position().x())
+			position = game.at(personaje.position().x()+9-1,0)
 	}
 }
