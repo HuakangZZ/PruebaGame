@@ -10,6 +10,7 @@ object juego {
 		keyboard.b().onPressDo { game.say(rojito,"hola")}
 		keyboard.right().onPressDo { azulito.moverDerecha()}
 		keyboard.left().onPressDo { azulito.moverIzquierda()}
+		keyboard.l().onPressDo { azulito.pegar()}
 		game.title("Peleita")
 		game.height(17)
 		game.width(35)
@@ -20,6 +21,10 @@ object juego {
 		
 		game.onTick(500,"prueba",{
 		rojito.cambiar()
+	})
+	
+	game.onTick(500,"prueba",{
+		azulito.cambiar()
 	})
 		
 	}

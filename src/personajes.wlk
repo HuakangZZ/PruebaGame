@@ -34,7 +34,7 @@ object rojito {
 }
 
 object azulito {
-	var property image = "MejorPajarito.png"
+	var property image = "azulitoEstatico1.png"
 	var property position = game.at(game.width(),0)
 	
 	method moverDerecha(){
@@ -45,6 +45,19 @@ object azulito {
 	method moverIzquierda(){
 		if (position.x() != game.width().div(6))
 		position = new Position(x = position.x()-1, y = position.y())
+	}
+	
+	method cambiar() =
+		if(image == "azulitoEstatico1.png")
+			image ="azulitoEstatico2.png"
+		else
+			image = "rojitoEstatico1.png"
+			
+	method pegar(){
+		if (image == "azulitoEstatico1.png") 
+		image = "AzulitoPega.png"
+		else
+			image = "AzulitoPega2.png"
 	}
 	
 	method quieto(){
