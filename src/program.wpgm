@@ -1,0 +1,11 @@
+import wollok.game.*
+import personajes.*
+
+program Prueba{
+
+
+	game.onTick(500,"prueba",{
+		rojito.cambiar()
+	})
+
+}	
