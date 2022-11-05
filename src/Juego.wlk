@@ -21,13 +21,13 @@ object juego {
 		
 		game.onTick(500,"prueba",{
 		rojito.cambiar()
-	})
+		})
 	
-	game.onTick(500,"prueba",{
+		game.onTick(500,"prueba",{
 		azulito.cambiar()
-	})
+		})
 		
-	}
+		}
 	
 	
 	

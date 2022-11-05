@@ -51,11 +51,11 @@ object azulito {
 		if(image == "azulitoEstatico1.png")
 			image ="azulitoEstatico2.png"
 		else
-			image = "rojitoEstatico1.png"
+			image = "azulitoEstatico1.png"
 			
 	method pegar(){
 		if (image == "azulitoEstatico1.png") 
-		image = "AzulitoPega.png"
+			image = "AzulitoPega.png"
 		else
 			image = "AzulitoPega2.png"
 	}

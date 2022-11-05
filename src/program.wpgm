@@ -1,11 +1,28 @@
 import wollok.game.*
 import personajes.*
+import Juego.*
 
 program Prueba{
-
-
+	keyboard.d().onPressDo { rojito.moverDerecha()}
+	keyboard.g().onPressDo { rojito.pegar()}
+	keyboard.a().onPressDo { rojito.moverIzquierda()}
+	keyboard.right().onPressDo { azulito.moverDerecha()}
+	keyboard.left().onPressDo { azulito.moverIzquierda()}
+	keyboard.l().onPressDo { azulito.pegar()}
+	game.title("Peleita")
+	game.height(17)
+	game.width(35)
+	game.boardGround("FondoBox.jpg")
+	game.addVisual(rojito)
+	game.addVisual(azulito)
+		
 	game.onTick(500,"prueba",{
 		rojito.cambiar()
 	})
-
+	
+	game.onTick(500,"prueba",{
+		azulito.cambiar()
+	})
+	
+	game.start()
 }	
