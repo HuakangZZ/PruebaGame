@@ -33,7 +33,7 @@ object rojito {
 	}
 	
 	method quieto(){
-		position = game.at(position.x()-1,0)
+		position = game.at(position.x(),0)
 	}
 
 }
@@ -68,7 +68,7 @@ object azulito {
 	}
 	
 	method quieto(){
-		position = game.at(position.x()+1,0)
+		position = game.at(position.x(),0)
 	}
 	
 }
