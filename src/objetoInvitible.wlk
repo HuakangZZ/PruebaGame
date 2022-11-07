@@ -6,11 +6,12 @@ object invisibleRojo {
 	var property position = game.at(4,0)
 	
 	method movete(personaje){
-		if(position.x() < rojito.position().x())
+		if(position.x() < rojito.position().x() and not personaje.estaMuerto())
 		position = game.at(personaje.position().x()+4,0)
 	}
 	
 	method moveteIzquierda(personaje){
+		if(not personaje.estaMuerto())
 		position = game.at(personaje.position().x()+4,0)
 	}
 }

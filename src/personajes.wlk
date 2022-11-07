@@ -1,5 +1,6 @@
 import wollok.game.*
 import objetoInvitible.*
+import Victoria.*
 
 object azulito {
 	var property image = "azul descanso.png"
@@ -8,21 +9,33 @@ object azulito {
 	var property estaCubierto = false
 	
 	method moverDerecha(){
-		if (position.x() != game.width() and invisibleRojo.position().x() < rojito.position().x())
-		position = new Position(x = position.x()+1, y = position.y())
-		invisibleRojo.movete(self)
+		if (position.x() != game.width() and invisibleRojo.position().x() < rojito.position().x()
+			and not self.estaMuerto()
+		)
+		self.derechaConInvisible()
 		if (invisibleRojo.position().x() > rojito.position().x())
 			position = game.at(position.x()-1,0)
-		image = "Azul camina 1.png"
+		if(not self.estaMuerto())
+			image = "Azul camina 1.png"
 		estaCubierto = false
 	}
 	
+	method derechaConInvisible(){
+		position = new Position(x = position.x()+1, y = position.y())
+		invisibleRojo.movete(self)
+	}
+	
 	method moverIzquierda(){
-		if (position.x() != -1)
+		if (position.x() != -1 and not self.estaMuerto())
+		self.izquierdaConInvisible()
+		if (not self.estaMuerto())
+			image = "Azul camina 1.png"
+		estaCubierto = false
+	}
+	
+	method izquierdaConInvisible(){
 		position = new Position(x = position.x()-1, y = position.y())
 		invisibleRojo.moveteIzquierda(self)
-		image = "Azul camina 1.png"
-		estaCubierto = false
 	}
 	
 	method cambiar() {
@@ -32,8 +45,8 @@ object azulito {
 			image = "azul descanso.png"
 		estaCubierto = false
 	}
-			
-	method pegar(){
+	
+	method golpear(){
 		if (image == "azul descanso.png") 
 		image = "azul golpe alto.png"
 		else
@@ -42,6 +55,11 @@ object azulito {
 		if(rojito.noEstaCubierto() and invisibleRojo.position().x() == rojito.position().x())
 			rojito.recibirGolpe()
 	}
+			
+	method pegar(){
+		if(not self.estaMuerto())
+			self.golpear()
+	}
 	
 	method noEstaCubierto() = estaCubierto == false
 	
@@ -49,7 +67,7 @@ object azulito {
 		position = game.at(position.x(),0)
 	}
 	
-	method defenderse(){
+	method defensa(){
 		if (image == "azul descanso.png" or image == "azul camina 1.png")
 			image = "azul defensa 1.png.png"
 		else
@@ -57,11 +75,25 @@ object azulito {
 		estaCubierto = true
 	}
 	
-	method recibirGolpe(){
-		image = "azul golpeado.png"
-		vida = vida - 1
+	method defenderse(){
+		if(not self.estaMuerto())
+			self.defensa()
 	}
+	
+	method recibirGolpe(){
+		if(not self.estaMuerto())
+		image = "azul golpeado.png"
+		vida = 0.max(vida - 1)
+	}
+	
+	method estaMuerto() = vida <= 0
 
+	method perder(){
+		if(self.estaMuerto())
+		image = "azul nokeado.png"
+		//rojoGana.ganar()
+		
+	}
 }
 
 object rojito {
@@ -71,16 +103,18 @@ object rojito {
 	var property estaCubierto = false
 	
 	method moverDerecha(){
-		if (position.x() != game.width()-9)
-		position = new Position(x = position.x()+1, y = position.y())
-		image = "Rojo camina 1.png"
+		if (position.x() != game.width()-9 and not self.estaMuerto())
+			position = new Position(x = position.x()+1, y = position.y())
+		if (not self.estaMuerto())	
+			image = "Rojo camina 1.png"
 	}
 	
 	method moverIzquierda(){
-		if (position.x() != invisibleRojo.position().x())
+		if (position.x() != invisibleRojo.position().x() and not self.estaMuerto())
 		position = new Position(x = position.x()-1, y = position.y())
-		if (self.position().x() < invisibleRojo.position().x())
+		if (self.position().x() < invisibleRojo.position().x() and not self.estaMuerto())
 			position = game.at(position.x()+1,0)
+		if (not self.estaMuerto())
 			image = "Rojo camina 1.png"
 	}
 	
@@ -92,15 +126,19 @@ object rojito {
 		estaCubierto = false
 		}
 		
-			
-	method pegar(){
+	method golpear(){
 		if (image == "rojo descanso-1.png.png") 
 			image = "rojo golpe alto.png"
 		else
 			image = "rojo golpe.png"
 		estaCubierto = false
-		if(azulito.noEstaCubierto() and invisibleRojo.position().x() == self.position().x())
+		if(azulito.noEstaCubierto() and invisibleRojo.position().x() == self.position().x() and not azulito.estaMuerto())
 			azulito.recibirGolpe()
+	}
+			
+	method pegar(){
+		if(not self.estaMuerto())
+		self.golpear()
 	}
 	
 	method quieto(){
@@ -110,16 +148,32 @@ object rojito {
 	method noEstaCubierto() = estaCubierto == false
 	
 	method recibirGolpe(){
+		if(not self.estaMuerto())
 		image = "rojo golpeado.png"
-		vida = vida - 1
+		vida = 0.max(vida - 1)
 	}
 	
-	method defenderse(){
+	method defensa(){
 		if (image == "rojo descanso.png" or image == "rojo camina 1.png")
 			image = "rojo defensa.png"
 		else
 			image = "rojo abajo.png"
 		estaCubierto = true
 	}
+	
+	method defenderse(){
+		if(not self.estaMuerto())
+		self.defensa()
+	}
+	
+	method estaMuerto() = vida <= 0
+	
+	method perder(){
+		if(self.estaMuerto())
+		image = "rojo nokeado.png"
+		
+	}
+	
+	
 	
 }
