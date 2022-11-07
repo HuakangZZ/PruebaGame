@@ -2,10 +2,20 @@ import wollok.game.*
 import personajes.*
 import objetoInvitible.*
 import vida.*
+import Victoria.*
 
 object juego {
+	method inicio(){
+		game.addVisual(pepe)
+		game.title("WollokPunch")
+		game.height(15)
+		game.width(30)
+		keyboard.s().onPressDo{self.configuracion()}
+		game.start()
+	}
 	
-	method iniciar(){
+	method configuracion(){
+		game.clear()
 		keyboard.d().onPressDo { azulito.moverDerecha()}
 		keyboard.g().onPressDo { azulito.pegar()}
 		keyboard.a().onPressDo { azulito.moverIzquierda()}
@@ -14,10 +24,11 @@ object juego {
 		keyboard.left().onPressDo { rojito.moverIzquierda()}
 		keyboard.l().onPressDo { rojito.pegar()}
 		keyboard.k().onPressDo { rojito.defenderse()}
-		game.title("WollokPunch")
+		//game.title("WollokPunch")
 		game.height(15)
 		game.width(30)
-		game.boardGround("FondoBox.jpg")
+		game.addVisual(fondo)
+		//game.boardGround("FondoBox.jpg")
 		game.addVisual(rojito)
 		game.addVisual(azulito)
 		game.addVisual(invisibleRojo)
@@ -41,7 +52,7 @@ object juego {
 		game.whenCollideDo(azulito,{p => azulito.quieto()})
 		game.whenCollideDo(rojito,{p => rojito.quieto()})
 	
-		game.start()
+		//game.start()
 		
 	}
 	

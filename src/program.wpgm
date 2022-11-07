@@ -3,5 +3,5 @@ import personajes.*
 import Juego.*
 
 program Prueba{
-	juego.iniciar()
+	juego.inicio()
 }	

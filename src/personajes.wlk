@@ -91,7 +91,7 @@ object azulito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "azul nokeado.png"
-		//rojoGana.ganar()
+		rojoGana.ganar()
 		
 	}
 }
