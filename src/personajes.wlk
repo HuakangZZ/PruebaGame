@@ -1,50 +1,71 @@
 import wollok.game.*
 import objetoInvitible.*
 
-object rojito {
-	var property image = "rojitoEstatico1.png"
+object azulito {
+	var property image = "azul descanso.png"
 	var property position = game.at(0,0)
+	var property vida = 5
+	var property estaCubierto = false
 	
 	method moverDerecha(){
 		if (position.x() != game.width())
 		position = new Position(x = position.x()+1, y = position.y())
 		invisibleRojo.movete(self)
-		if (invisibleRojo.position().x() > azulito.position().x())
+		if (invisibleRojo.position().x() > rojito.position().x())
 			position = game.at(position.x()-1,0)
+		image = "Azul camina 1.png"
+		estaCubierto = false
 	}
 	
 	method moverIzquierda(){
 		if (position.x() != -1)
 		position = new Position(x = position.x()-1, y = position.y())
 		invisibleRojo.movete(self)
+		image = "Azul camina 1.png"
+		estaCubierto = false
 	}
 	
-	method cambiar() =
-		if(image == "rojitoEstatico1.png")
-			image ="rojitoEstatico2.png"
+	method cambiar() {
+		if(image == "azul descanso.png")
+			image ="azul descanso abajo.png"
 		else
-			image = "rojitoEstatico1.png"
+			image = "azul descanso.png"
+		estaCubierto = false
+	}
 			
 	method pegar(){
-		if (image == "rojitoEstatico1.png") 
-		image = "RojitoPega.png"
+		if (image == "azul descanso.png") 
+		image = "azul golpe alto.png"
 		else
-			image = "RojitoPega2.png"
+			image = "azul golpe.png"
+		estaCubierto = false
+		if(rojito.noEstaCubierto())
+			rojito.recibirGolpe()
 	}
+	
+	method noEstaCubierto() = estaCubierto == false
 	
 	method quieto(){
 		position = game.at(position.x(),0)
 	}
+	
+	method recibirGolpe(){
+		image = "azul golpeado.png"
+		vida = vida - 1
+	}
 
 }
 
-object azulito {
-	var property image = "azulitoEstatico1.png"
+object rojito {
+	var property image = "rojo descanso-1.png.png"
 	var property position = game.at(game.width()-9,0)
+	var property vida = 5
+	var property estaCubierto = false
 	
 	method moverDerecha(){
 		if (position.x() != game.width()-9)
 		position = new Position(x = position.x()+1, y = position.y())
+		image = "Rojo camina 1.png"
 	}
 	
 	method moverIzquierda(){
@@ -52,23 +73,37 @@ object azulito {
 		position = new Position(x = position.x()-1, y = position.y())
 		if (self.position().x() < invisibleRojo.position().x())
 			position = game.at(position.x()+1,0)
+			image = "Rojo camina 1.png"
 	}
 	
-	method cambiar() =
-		if(image == "azulitoEstatico1.png")
-			image ="azulitoEstatico2.png"
+	method cambiar(){
+		if(image == "rojo descanso-1.png.png")
+			image ="rojo descanso abajo.png"
 		else
-			image = "azulitoEstatico1.png"
+			image = "rojo descanso-1.png.png"
+		estaCubierto = false
+		}
+		
 			
 	method pegar(){
-		if (image == "azulitoEstatico1.png") 
-			image = "AzulitoPega.png"
+		if (image == "rojo descanso-1.png.png") 
+			image = "rojo golpe alto.png"
 		else
-			image = "AzulitoPega2.png"
+			image = "rojo golpe.png"
+		estaCubierto = false
+		if(azulito.noEstaCubierto())
+			azulito.recibirGolpe()
 	}
 	
 	method quieto(){
 		position = game.at(position.x(),0)
+	}
+	
+	method noEstaCubierto() = estaCubierto == false
+	
+	method recibirGolpe(){
+		image = "rojo golpeado.png"
+		vida = vida - 1
 	}
 	
 }

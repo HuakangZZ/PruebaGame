@@ -5,12 +5,12 @@ import objetoInvitible.*
 object juego {
 	
 	method iniciar(){
-		keyboard.d().onPressDo { rojito.moverDerecha()}
-		keyboard.g().onPressDo { rojito.pegar()}
-		keyboard.a().onPressDo { rojito.moverIzquierda()}
-		keyboard.right().onPressDo { azulito.moverDerecha()}
-		keyboard.left().onPressDo { azulito.moverIzquierda()}
-		keyboard.l().onPressDo { azulito.pegar()}
+		keyboard.d().onPressDo { azulito.moverDerecha()}
+		keyboard.g().onPressDo { azulito.pegar()}
+		keyboard.a().onPressDo { azulito.moverIzquierda()}
+		keyboard.right().onPressDo { rojito.moverDerecha()}
+		keyboard.left().onPressDo { rojito.moverIzquierda()}
+		keyboard.l().onPressDo { rojito.pegar()}
 		game.title("Peleita")
 		game.height(15)
 		game.width(30)
