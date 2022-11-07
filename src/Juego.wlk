@@ -8,9 +8,11 @@ object juego {
 		keyboard.d().onPressDo { azulito.moverDerecha()}
 		keyboard.g().onPressDo { azulito.pegar()}
 		keyboard.a().onPressDo { azulito.moverIzquierda()}
+		keyboard.f().onPressDo { azulito.defenderse()}
 		keyboard.right().onPressDo { rojito.moverDerecha()}
 		keyboard.left().onPressDo { rojito.moverIzquierda()}
 		keyboard.l().onPressDo { rojito.pegar()}
+		keyboard.k().onPressDo { rojito.defenderse()}
 		game.title("Peleita")
 		game.height(15)
 		game.width(30)

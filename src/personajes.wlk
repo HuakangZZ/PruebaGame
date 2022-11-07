@@ -8,7 +8,7 @@ object azulito {
 	var property estaCubierto = false
 	
 	method moverDerecha(){
-		if (position.x() != game.width())
+		if (position.x() != game.width() and invisibleRojo.position().x() < rojito.position().x())
 		position = new Position(x = position.x()+1, y = position.y())
 		invisibleRojo.movete(self)
 		if (invisibleRojo.position().x() > rojito.position().x())
@@ -20,7 +20,7 @@ object azulito {
 	method moverIzquierda(){
 		if (position.x() != -1)
 		position = new Position(x = position.x()-1, y = position.y())
-		invisibleRojo.movete(self)
+		invisibleRojo.moveteIzquierda(self)
 		image = "Azul camina 1.png"
 		estaCubierto = false
 	}
@@ -39,7 +39,7 @@ object azulito {
 		else
 			image = "azul golpe.png"
 		estaCubierto = false
-		if(rojito.noEstaCubierto())
+		if(rojito.noEstaCubierto() and invisibleRojo.position().x() == rojito.position().x())
 			rojito.recibirGolpe()
 	}
 	
@@ -47,6 +47,14 @@ object azulito {
 	
 	method quieto(){
 		position = game.at(position.x(),0)
+	}
+	
+	method defenderse(){
+		if (image == "azul descanso.png" or image == "azul camina 1.png")
+			image = "azul defensa 1.png.png"
+		else
+			image = "azul abajo.png"
+		estaCubierto = true
 	}
 	
 	method recibirGolpe(){
@@ -69,7 +77,7 @@ object rojito {
 	}
 	
 	method moverIzquierda(){
-		if (position.x() != game.width().div(6))
+		if (position.x() != invisibleRojo.position().x())
 		position = new Position(x = position.x()-1, y = position.y())
 		if (self.position().x() < invisibleRojo.position().x())
 			position = game.at(position.x()+1,0)
@@ -91,7 +99,7 @@ object rojito {
 		else
 			image = "rojo golpe.png"
 		estaCubierto = false
-		if(azulito.noEstaCubierto())
+		if(azulito.noEstaCubierto() and invisibleRojo.position().x() == self.position().x())
 			azulito.recibirGolpe()
 	}
 	
@@ -104,6 +112,14 @@ object rojito {
 	method recibirGolpe(){
 		image = "rojo golpeado.png"
 		vida = vida - 1
+	}
+	
+	method defenderse(){
+		if (image == "rojo descanso.png" or image == "rojo camina 1.png")
+			image = "rojo defensa.png"
+		else
+			image = "rojo abajo.png"
+		estaCubierto = true
 	}
 	
 }
