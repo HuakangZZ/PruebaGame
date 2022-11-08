@@ -5,3 +5,5 @@ import Juego.*
 program Prueba{
 	juego.inicio()
 }	
+
+//FALTAN OPCIONES PARA VER LAS TECLAS

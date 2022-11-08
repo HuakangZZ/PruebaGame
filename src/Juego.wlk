@@ -5,12 +5,14 @@ import vida.*
 import Victoria.*
 
 object juego {
+	
 	method inicio(){
+		game.clear()
 		game.addVisual(pepe)
 		game.title("WollokPunch")
 		game.height(15)
 		game.width(30)
-		keyboard.s().onPressDo{self.configuracion()}
+		keyboard.enter().onPressDo{self.configuracion()}
 		game.start()
 	}
 	
@@ -51,11 +53,11 @@ object juego {
 		
 		game.whenCollideDo(azulito,{p => azulito.quieto()})
 		game.whenCollideDo(rojito,{p => rojito.quieto()})
-	
+		
+		//sonido.iniciarMusica()
 		//game.start()
 		
 	}
-	
 	
 	
 }

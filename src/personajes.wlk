@@ -83,7 +83,7 @@ object azulito {
 	method recibirGolpe(){
 		if(not self.estaMuerto())
 		image = "azul golpeado.png"
-		vida = 0.max(vida - 1)
+		vida = 0.max(vida - 1)	
 	}
 	
 	method estaMuerto() = vida <= 0
@@ -171,7 +171,7 @@ object rojito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "rojo nokeado.png"
-		
+		azulGana.ganar()
 	}
 	
 	
