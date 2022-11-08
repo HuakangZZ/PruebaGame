@@ -91,7 +91,7 @@ object azulito {
 		if(not self.estaMuerto())
 		image = "azul golpeado.png"
 		vida = 0.max(vida - 1)
-		sonido.golpe()
+		sonidoGolpeAzul.golpe()
 	}
 	
 	method estaMuerto() = vida <= 0

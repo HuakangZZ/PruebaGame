@@ -130,7 +130,20 @@ object sonido{
 		menuInicio.shouldLoop(true)	
 	}
 	
+	
 		
 }
 
-
+object sonidoGolpeAzul{
+	
+	var golpe = game.sound("Golpe.mp3")
+	
+	method golpe(){
+		game.schedule(5,{golpe.play()})
+		self.reiniciarGolpe()
+	}
+	
+	method reiniciarGolpe(){
+		golpe = game.sound("Golpe.mp3")
+	}
+	}
