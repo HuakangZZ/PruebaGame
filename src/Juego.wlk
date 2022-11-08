@@ -12,8 +12,10 @@ object juego {
 		game.title("WollokPunch")
 		game.height(15)
 		game.width(30)
+		rojito.reiniciar()
+		azulito.reiniciar()
+		//sonido.reiniciar()
 		keyboard.enter().onPressDo{self.configuracion()}
-		game.start()
 	}
 	
 	method configuracion(){
@@ -26,7 +28,7 @@ object juego {
 		keyboard.left().onPressDo { rojito.moverIzquierda()}
 		keyboard.l().onPressDo { rojito.pegar()}
 		keyboard.k().onPressDo { rojito.defenderse()}
-		//game.title("WollokPunch")
+		game.title("WollokPunch")
 		game.height(15)
 		game.width(30)
 		game.addVisual(fondo)
@@ -54,7 +56,7 @@ object juego {
 		game.whenCollideDo(azulito,{p => azulito.quieto()})
 		game.whenCollideDo(rojito,{p => rojito.quieto()})
 		
-		//sonido.iniciarMusica()
+		sonido.iniciarMusica()
 		//game.start()
 		
 	}

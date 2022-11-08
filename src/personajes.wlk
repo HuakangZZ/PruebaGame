@@ -8,6 +8,13 @@ object azulito {
 	var property vida = 5
 	var property estaCubierto = false
 	
+	method reiniciar(){
+		image = "azul descanso.png"
+		position = game.at(0,0)
+		vida = 5
+		estaCubierto = false
+	}
+	
 	method moverDerecha(){
 		if (position.x() != game.width() and invisibleRojo.position().x() < rojito.position().x()
 			and not self.estaMuerto()
@@ -101,6 +108,13 @@ object rojito {
 	var property position = game.at(game.width()-9,0)
 	var property vida = 5
 	var property estaCubierto = false
+	
+	method reiniciar(){
+		image = "rojo descanso-1.png.png"
+		position = game.at(game.width()-9,0)
+		vida = 5
+		 estaCubierto = false
+	}
 	
 	method moverDerecha(){
 		if (position.x() != game.width()-9 and not self.estaMuerto())

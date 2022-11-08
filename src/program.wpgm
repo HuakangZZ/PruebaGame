@@ -4,6 +4,7 @@ import Juego.*
 
 program Prueba{
 	juego.inicio()
+	game.start()
 }	
 
 //FALTAN OPCIONES PARA VER LAS TECLAS

@@ -15,20 +15,33 @@ object fotoAzulGana{
 
 object rojoGana {
 	
+	method pato(){
+		juego.inicio()
+		sonido.reiniciar()
+	}
+	
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoRojoGana)
-		keyboard.r().onPressDo { juego.inicio()}
+		keyboard.r().onPressDo { self.pato()}
+		keyboard.p().onPressDo { game.stop()}
+		
 	}
 	
 }
 
 object azulGana {
 	
+	method pato(){
+		juego.inicio()
+		sonido.reiniciar()
+	}
+	
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoAzulGana)
-		keyboard.r().onPressDo { juego.inicio()}
+		keyboard.r().onPressDo { self.pato()}
+		keyboard.p().onPressDo { game.stop()}
 	}
 	
 }
@@ -44,19 +57,26 @@ object fondo{
 }
 
 object sonido{
-	const property campana = game.sound("musical114.mp3")
-	const property musica = game.sound("MusicaIntro.mp3")
+	var campana = game.sound("musical114.mp3")
+	var musica = game.sound("MusicaIntro.mp3")
+	
+	method reiniciar(){
+		self.detenerMusica()
+		campana = game.sound("musical114.mp3")
+		musica = game.sound("MusicaIntro.mp3")
+	}
 	
 	method iniciarMusica(){	
 		
 		game.schedule(100,{campana.play()})
-		musica.volume(0.2)
+		
 		musica.shouldLoop(true)	
+		musica.volume(0.2)
 		game.schedule(2500,{ musica.play()})
-			
 	}
 	
 	method detenerMusica(){
+		campana.stop()
 		musica.stop()		
 	}
 	
