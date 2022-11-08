@@ -46,7 +46,7 @@ object azulGana {
 	
 }
 
-object pepe{
+object menu{
 	var property image = "menu de inicio.png"
 	var property position = game.origin()
 }

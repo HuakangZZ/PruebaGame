@@ -8,7 +8,7 @@ object juego {
 	
 	method inicio(){
 		game.clear()
-		game.addVisual(pepe)
+		game.addVisual(menu)
 		game.title("WollokPunch")
 		game.height(15)
 		game.width(30)
