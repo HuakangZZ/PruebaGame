@@ -15,14 +15,23 @@ object fotoAzulGana{
 
 object rojoGana {
 	
+	var property azulGana = game.sound("Ruido ambiente.mp3")
+	
+	method reiniciarSonidoAca(){
+		azulGana.stop()
+		azulGana = game.sound("Ruido ambiente.mp3")
+	}
+	
 	method resetGame(){
 		juego.inicio()
 		sonido.reiniciar()
+		self.reiniciarSonidoAca()
 	}
 	
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoRojoGana)
+		game.schedule(1,{azulGana.play()})
 		keyboard.r().onPressDo { self.resetGame()}
 		keyboard.p().onPressDo { game.stop()}
 		
@@ -32,14 +41,23 @@ object rojoGana {
 
 object azulGana {
 	
+	var property azulGana = game.sound("Ruido ambiente.mp3")
+	
+	method reiniciarSonidoAca(){
+		azulGana.stop()
+		azulGana = game.sound("Ruido ambiente.mp3")
+	}
+	
 	method resetGame(){
 		juego.inicio()
 		sonido.reiniciar()
+		self.reiniciarSonidoAca()
 	}
 	
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoAzulGana)
+		game.schedule(1,{azulGana.play()})
 		keyboard.r().onPressDo { self.resetGame()}
 		keyboard.p().onPressDo { game.stop()}
 	}
@@ -93,7 +111,7 @@ object sonido{
 	}
 	
 	method golpe(){
-		game.schedule(0,{golpe.play()})
+		game.schedule(10,{golpe.play()})
 		self.reiniciarGolpe()
 	}
 	
