@@ -106,12 +106,7 @@ object sonido{
 		musica.stop()		
 	}
 	
-	method detenerGolpe(){
-		golpe.stop()
-	}
-	
 	method reiniciarGolpe(){
-		self.detenerGolpe()
 		golpe = game.sound("Golpe.mp3")
 		
 	}

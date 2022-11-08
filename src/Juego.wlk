@@ -15,7 +15,7 @@ object juego {
 		rojito.reiniciar()
 		azulito.reiniciar()
 		//sonido.reiniciar()
-		keyboard.y().onPressDo{self.controles()}
+		keyboard.c().onPressDo{self.controles()}
 		keyboard.enter().onPressDo{self.configuracion()}
 	}
 	
