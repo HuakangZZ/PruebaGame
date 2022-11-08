@@ -3,6 +3,12 @@ import personajes.*
 import vida.*
 import wollok.game.*
 
+
+object menuControles{
+	var property image = "controles.png"
+	var property position = game.origin()
+}
+
 object fotoRojoGana{
 	var property image = "rojo Gana.png"
 	var property position = game.origin()

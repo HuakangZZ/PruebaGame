@@ -15,6 +15,7 @@ object juego {
 		rojito.reiniciar()
 		azulito.reiniciar()
 		//sonido.reiniciar()
+		keyboard.y().onPressDo{self.controles()}
 		keyboard.enter().onPressDo{self.configuracion()}
 	}
 	
@@ -59,6 +60,12 @@ object juego {
 		sonido.iniciarMusica()
 		//game.start()
 		
+	}
+	
+	method controles(){
+		game.clear()
+		game.addVisual(menuControles)
+		keyboard.r().onPressDo { self.inicio()}
 	}
 	
 	
