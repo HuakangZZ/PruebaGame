@@ -99,7 +99,7 @@ object azulito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "azul nokeado.png"
-		rojoGana.ganar()
+		game.schedule(700,{rojoGana.ganar()})
 		
 	}
 }
@@ -187,7 +187,7 @@ object rojito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "rojo nokeado.png"
-		azulGana.ganar()
+		game.schedule(700,{azulGana.ganar()})
 	}
 	
 	

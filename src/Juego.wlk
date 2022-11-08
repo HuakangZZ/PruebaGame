@@ -14,13 +14,15 @@ object juego {
 		game.width(30)
 		rojito.reiniciar()
 		azulito.reiniciar()
-		//sonido.reiniciar()
+		sonido.sonidoDeInicio()
 		keyboard.c().onPressDo{self.controles()}
 		keyboard.enter().onPressDo{self.configuracion()}
+		keyboard.p().onPressDo { game.stop()}
 	}
 	
 	method configuracion(){
 		game.clear()
+		sonido.reiniciarSonidoDeInicio()
 		keyboard.d().onPressDo { azulito.moverDerecha()}
 		keyboard.g().onPressDo { azulito.pegar()}
 		keyboard.a().onPressDo { azulito.moverIzquierda()}
@@ -63,9 +65,11 @@ object juego {
 	}
 	
 	method controles(){
+		sonido.reiniciarSonidoDeInicio()
 		game.clear()
 		game.addVisual(menuControles)
 		keyboard.r().onPressDo { self.inicio()}
+		keyboard.p().onPressDo { game.stop()}
 	}
 	
 	

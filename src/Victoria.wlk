@@ -5,27 +5,27 @@ import wollok.game.*
 
 
 object menuControles{
-	var property image = "controles.png"
+	var property image = "controles final.png"
 	var property position = game.origin()
 }
 
 object fotoRojoGana{
-	var property image = "rojo Gana.png"
+	var property image = "gano rojocontroles.png"
 	var property position = game.origin()
 }
 
 object fotoAzulGana{
-	var property image = "azul Gana.png"
+	var property image = "gano azul controles.png"
 	var property position = game.origin()
 }
 
 object rojoGana {
 	
-	var property azulGana = game.sound("Ruido ambiente.mp3")
+	var property rojoGana = game.sound("Ruido ambiente.mp3")
 	
 	method reiniciarSonidoAca(){
-		azulGana.stop()
-		azulGana = game.sound("Ruido ambiente.mp3")
+		rojoGana.stop()
+		rojoGana = game.sound("Ruido ambiente.mp3")
 	}
 	
 	method resetGame(){
@@ -37,7 +37,8 @@ object rojoGana {
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoRojoGana)
-		game.schedule(1,{azulGana.play()})
+		rojoGana.volume(0.3)
+		game.schedule(1,{rojoGana.play()})
 		keyboard.r().onPressDo { self.resetGame()}
 		keyboard.p().onPressDo { game.stop()}
 		
@@ -63,6 +64,7 @@ object azulGana {
 	method ganar(){
 		game.clear()
 		game.addVisual(fotoAzulGana)
+		azulGana.volume(0.3)
 		game.schedule(1,{azulGana.play()})
 		keyboard.r().onPressDo { self.resetGame()}
 		keyboard.p().onPressDo { game.stop()}
@@ -71,7 +73,7 @@ object azulGana {
 }
 
 object menu{
-	var property image = "menu de inicio.png"
+	var property image = "menu controles.png"
 	var property position = game.origin()
 }
 
@@ -84,6 +86,7 @@ object sonido{
 	var campana = game.sound("musical114.mp3")
 	var musica = game.sound("MusicaIntro.mp3")
 	var golpe = game.sound("Golpe.mp3")
+	var menuInicio = game.sound("ojo de tigre instrumental.mp3")
 	
 	method reiniciar(){
 		self.detenerMusica()
@@ -98,7 +101,7 @@ object sonido{
 		
 		musica.shouldLoop(true)	
 		musica.volume(0.2)
-		game.schedule(2500,{ musica.play()})
+		game.schedule(1500,{ musica.play()})
 	}
 	
 	method detenerMusica(){
@@ -112,8 +115,19 @@ object sonido{
 	}
 	
 	method golpe(){
-		game.schedule(10,{golpe.play()})
+		game.schedule(5,{golpe.play()})
 		self.reiniciarGolpe()
+	}
+	
+	method reiniciarSonidoDeInicio(){
+		menuInicio.stop()
+		menuInicio = game.sound("ojo de tigre instrumental.mp3")
+	}
+	
+	method sonidoDeInicio(){
+		menuInicio.volume(0.5)
+		game.schedule(0,{menuInicio.play()})
+		menuInicio.shouldLoop(true)	
 	}
 	
 		
