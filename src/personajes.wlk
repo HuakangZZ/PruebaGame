@@ -8,6 +8,7 @@ object azulito {
 	var property vida = 17
 	var property estaCubierto = false
 	var property estaNokeado = false
+	var pegue = true
 	
 	
 	
@@ -64,12 +65,14 @@ object azulito {
 		else
 			image = "azul golpe.png"
 		estaCubierto = false
+		pegue = false
 		if(rojito.noEstaCubierto() and invisibleRojo.position().x() == rojito.position().x() and not rojito.estaNokeado())
 			rojito.recibirGolpe()
+		game.schedule(500,{pegue = true})
 	}
 			
 	method pegar(){
-		if(not self.estaMuerto() and not rojito.estaNokeado() and not estaNokeado)
+		if(not self.estaMuerto() and not rojito.estaNokeado() and not estaNokeado and pegue)
 			self.golpear()
 	}
 	
@@ -111,12 +114,27 @@ object azulito {
 	
 	method caerse(){
 		estaNokeado = true
-		self.seNokea() 
+		self.seNokea()
 		game.removeTickEvent("pruebaAzulito")
-		game.schedule(1000,{self.seLevantaPrimeraVez()})
-		game.schedule(1500,{self.seLevantaPrimeraVez2()})
+		if(self.seCaePrimeraVez())
+		self.configuracionCaersePrimeraVez()
+		else
+		self.configuracionCaerseSegundaVez()
+		
+	}
+	
+	method configuracionCaersePrimeraVez(){
+		game.schedule(2000,{self.seLevantaPrimeraVez()})
+		game.schedule(2500,{self.seLevantaPrimeraVez2()})
 		vida--
-		game.schedule(2000,{self.movimientoAzul()})
+		game.schedule(3000,{self.movimientoAzul()})
+	}
+	
+	method configuracionCaerseSegundaVez(){
+		game.schedule(4000,{self.seLevantaPrimeraVez()})
+		game.schedule(6000,{self.seLevantaPrimeraVez2()})
+		vida--
+		game.schedule(7000,{self.movimientoAzul()})
 	}
 	
 	method noEstaEstatico(){
@@ -143,7 +161,7 @@ object azulito {
 	method configRecibirGolpe(){
 		image = "azul golpeado.png"
 		vida = 0.max(vida - 1)
-		sonido.golpe()
+		sonidoGolpeAzul.golpe()
 	}
 	
 	method estaMuerto() = vida <= 0
@@ -151,8 +169,24 @@ object azulito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "azul nokeado.png"
-		game.schedule(700,{rojoGana.ganar()})
+		sonido.musica().stop()
+		sonido.gritoMuere()
+		self.parpadear()
+		game.schedule(2700,{rojoGana.ganar()})
+		}
 		
+	method cambioParpadeo(){
+		if(image == "azul nokeado.png")
+		image = "rojo nokeadovacio.png"
+		else
+		image = "azul nokeado.png"
+	}
+	
+	method parpadear(){
+		game.removeTickEvent("pruebaAzulito")
+		game.onTick(300,"parpadeo",{
+			self.cambioParpadeo()
+		})
 	}
 }
 
@@ -162,7 +196,8 @@ object rojito {
 	var property vida = 17
 	var property estaCubierto = false
 	var property estaNokeado = false
-	
+	var pegue = true
+		
 	method reiniciar(){
 		image = "rojo descanso-1.png.png"
 		position = game.at(game.width()-9,0)
@@ -209,12 +244,14 @@ object rojito {
 		else
 			image = "rojo golpe.png"
 		estaCubierto = false
+		pegue = false
 		if(azulito.noEstaCubierto() and invisibleRojo.position().x() == self.position().x() and not azulito.estaMuerto() and not azulito.estaNokeado())
 			azulito.recibirGolpe()
+		game.schedule(500,{pegue = true})
 	}
 			
 	method pegar(){
-		if(not self.estaMuerto() and not azulito.estaNokeado() and not estaNokeado)
+		if(not self.estaMuerto() and not azulito.estaNokeado() and not estaNokeado and pegue)
 		self.golpear()
 	}
 	
@@ -236,7 +273,7 @@ object rojito {
 	}
 	
 	method defensa(){
-		if (image == "rojo descanso.png" or image == "rojo camina 1.png")
+		if (image == "rojo descanso-1.png.png" or image == "rojo camina 1.png")
 			image = "rojo defensa.png"
 		else
 			image = "rojo abajo.png"
@@ -253,7 +290,10 @@ object rojito {
 	method perder(){
 		if(self.estaMuerto())
 		image = "rojo nokeado.png"
-		game.schedule(700,{azulGana.ganar()})
+		sonido.musica().stop()
+		sonido.gritoMuere()
+		self.parpadear()
+		game.schedule(2700,{azulGana.ganar()})
 	}
 	
 	method seCaePrimeraVez() = vida == 12
@@ -274,12 +314,27 @@ object rojito {
 	
 	method caerse(){
 		estaNokeado = true
-		self.seNokea() 
+		self.seNokea()
 		game.removeTickEvent("pruebaRojito")
-		game.schedule(900,{self.seLevantaPrimeraVez()})
-		game.schedule(1400,{self.seLevantaPrimeraVez2()})
+		if(self.seCaePrimeraVez())
+		self.configuracionCaersePrimeraVez()
+		else
+		self.configuracionCaerseSegundaVez()
+		
+	}
+	
+	method configuracionCaersePrimeraVez(){
+		game.schedule(2000,{self.seLevantaPrimeraVez()})
+		game.schedule(2500,{self.seLevantaPrimeraVez2()})
 		vida--
-		game.schedule(2000,{self.movimientoRojo()})
+		game.schedule(3000,{self.movimientoRojo()})
+	}
+	
+	method configuracionCaerseSegundaVez(){
+		game.schedule(4000,{self.seLevantaPrimeraVez()})
+		game.schedule(6000,{self.seLevantaPrimeraVez2()})
+		vida--
+		game.schedule(7000,{self.movimientoRojo()})
 	}
 	
 	method movimientoRojo(){
@@ -289,6 +344,20 @@ object rojito {
 			self.noEstaEstatico()
 			else
 			self.perder()
+		})
+	}
+	
+	method cambioParpadeo(){
+		if(image == "rojo nokeado.png")
+		image = "rojo nokeadovacio.png"
+		else
+		image = "rojo nokeado.png"
+	}
+	
+	method parpadear(){
+		game.removeTickEvent("pruebaRojito")
+		game.onTick(300,"parpadeo",{
+			self.cambioParpadeo()
 		})
 	}
 }

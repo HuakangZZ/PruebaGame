@@ -84,15 +84,18 @@ object fondo{
 
 object sonido{
 	var campana = game.sound("musical114.mp3")
-	var musica = game.sound("MusicaIntro.mp3")
+	var property musica = game.sound("MusicaIntro.mp3")
 	var golpe = game.sound("Golpe.mp3")
 	var menuInicio = game.sound("ojo de tigre instrumental.mp3")
+	var gritoMuere = game.sound("gritoPierde.mp3")
+	
 	
 	method reiniciar(){
 		self.detenerMusica()
 		campana = game.sound("musical114.mp3")
 		musica = game.sound("MusicaIntro.mp3")
 		golpe = game.sound("Golpe.mp3")
+		gritoMuere = game.sound("gritoPierde.mp3")
 	}
 	
 	method iniciarMusica(){	
@@ -114,6 +117,10 @@ object sonido{
 		
 	}
 	
+	method gritoMuere(){
+		gritoMuere.play()
+	}
+	
 	method golpe(){
 		game.schedule(5,{golpe.play()})
 		self.reiniciarGolpe()
@@ -130,13 +137,12 @@ object sonido{
 		menuInicio.shouldLoop(true)	
 	}
 	
-	
 		
 }
 
 object sonidoGolpeAzul{
 	
-	var golpe = game.sound("Golpe.mp3")
+	var golpe = game.sound("Golpe2.mp3")
 	
 	method golpe(){
 		game.schedule(5,{golpe.play()})
