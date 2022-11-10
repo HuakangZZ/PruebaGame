@@ -42,19 +42,9 @@ object juego {
 		game.addVisual(vidaRojo)
 		game.addVisual(vidaAzul)
 		
-		game.onTick(500,"prueba",{
-			if(not rojito.estaMuerto())
-			rojito.cambiar()
-			else
-			rojito.perder()
-		})
+		rojito.movimientoRojo()
 	
-		game.onTick(500,"prueba",{
-			if(not azulito.estaMuerto())
-			azulito.cambiar()
-			else
-			azulito.perder()
-		})
+		azulito.movimientoAzul()
 		
 		game.whenCollideDo(azulito,{p => azulito.quieto()})
 		game.whenCollideDo(rojito,{p => rojito.quieto()})
