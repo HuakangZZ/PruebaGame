@@ -4,7 +4,7 @@ import Victoria.*
 import sonido.*
 
 class Peleador{
-	var property image 
+	var property image
 	var property position
 	var property vida = 17
 	var property estaCubierto = false

@@ -15,7 +15,7 @@ object fotoRojoGana{
 }
 
 object fotoAzulGana{
-	var property image = "gano azul controles.png"
+	var property image = "Azul gana Maradona.png"
 	var property position = game.origin()
 }
 
