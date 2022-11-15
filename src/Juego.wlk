@@ -3,6 +3,7 @@ import personajes.*
 import objetoInvitible.*
 import vida.*
 import Victoria.*
+import sonido.*
 
 object juego {
 	
@@ -42,9 +43,9 @@ object juego {
 		game.addVisual(vidaRojo)
 		game.addVisual(vidaAzul)
 		
-		rojito.movimientoRojo()
+		rojito.movimiento()
 	
-		azulito.movimientoAzul()
+		azulito.movimiento()
 		
 		game.whenCollideDo(azulito,{p => azulito.quieto()})
 		game.whenCollideDo(rojito,{p => rojito.quieto()})
