@@ -42,6 +42,7 @@ object juego {
 		game.addVisual(invisibleRojo)
 		game.addVisual(vidaRojo)
 		game.addVisual(vidaAzul)
+		game.addVisual(contador)
 		
 		rojito.movimiento()
 	

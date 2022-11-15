@@ -29,13 +29,15 @@ class Peleador{
 	method seLevantaPrimeraVez()
 	method seLevantaPrimeraVez2()
 	method configuracionCaersePrimeraVez(){
-		game.schedule(2000,{self.seLevantaPrimeraVez()})
-		game.schedule(2500,{self.seLevantaPrimeraVez2()})
+		contador.primeraCaida()
+		game.schedule(2500,{self.seLevantaPrimeraVez()})
+		game.schedule(3000,{self.seLevantaPrimeraVez2()})
 		vida--
-		game.schedule(3000,{self.movimiento()})
+		game.schedule(3500,{self.movimiento()})
 	}
 	
 	method configuracionCaerseSegundaVez(){
+		contador.segundaCaida()
 		game.schedule(4000,{self.seLevantaPrimeraVez()})
 		game.schedule(6000,{self.seLevantaPrimeraVez2()})
 		vida--
@@ -370,5 +372,66 @@ object rojito inherits Peleador(image = "rojo descanso-1.png.png",position = gam
 		game.onTick(300,"parpadeo",{
 			self.cambioParpadeo()
 		})
+	}
+	
+	
+}
+
+object contador{
+	var property position = game.origin()
+	const lista = ["imagenVacia.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png"]
+	var property image = lista.get(0)
+	
+	method hasta3(){
+		game.onTick(1000,"Contador",{
+			self.cambioHasta3()
+		})
+	}
+	
+	method hasta7(){
+		game.onTick(1000,"Contador",{
+			self.cambioHasta7()
+		})
+	}
+	
+	method primeraCaida(){
+		self.hasta3()
+		game.schedule(3300,{game.removeTickEvent("Contador")})
+		game.schedule(4000,{image = lista.get(0)})
+	}
+	
+	method segundaCaida(){
+		self.hasta7()
+		game.schedule(7300,{game.removeTickEvent("Contador")})
+		game.schedule(8000,{image = lista.get(0)})
+	}
+	
+	method cambioHasta3(){
+		if (image == lista.get(0))
+			image = lista.get(1)
+		else if(image == lista.get(1))
+			image = lista.get(2)
+		else if(image == lista.get(2))
+			image = lista.get(3)
+		else
+			image = lista.get(0)
+	}
+	
+	method cambioHasta7(){
+		if (image == lista.get(0))
+			image = lista.get(1)
+		else if(image == lista.get(1))
+			image = lista.get(2)
+		else if(image == lista.get(2))
+			image = lista.get(3)
+		else if (image == lista.get(3))
+			image = lista.get(4)
+		else if(image == lista.get(4))
+			image = lista.get(5)
+		else if(image == lista.get(5))
+			image = lista.get(6)
+		else
+			image = lista.get(7)
+			
 	}
 }
